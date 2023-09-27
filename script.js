@@ -24,6 +24,10 @@
 
 // Random generator for computer R, P, S
 
+
+
+function playGame() {
+
 // VARIABLES
 // index of 0, 1, 2
 var inputSelections = ["R", "P", "S"];
@@ -32,7 +36,7 @@ var compChoice = "";
 var isInputValid = false;
 var randomNumber = 0;
 var randomIndex = 0;
-var PlayGameAgain = true;
+var PlayGameAgain = false;
 
 var results = {
     wins: 0,
@@ -52,3 +56,31 @@ var messages = {
     computerInput: `The computer chose ${compChoice}`
 }
 
+    // do {
+
+        // get a valid input: R, P, or S
+        do {
+                isInputValid = false;
+                ourChoice = window.prompt(messages.enterSelection);
+                if (ourChoice === null) {
+                    return;
+                }
+                ourChoice = ourChoice.toUpperCase();
+
+                if (inputSelections.includes(ourChoice)) {
+                    isInputValid = true;
+                } else {
+                    window.alert(messages.invalidInput);
+                }
+        } while (!isInputValid)
+
+        // get computer's input: R, P, or S
+
+
+        console.log(ourChoice);
+
+
+    // } while (PlayGameAgain);
+}
+
+playGame();
