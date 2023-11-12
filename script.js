@@ -1,86 +1,60 @@
-// We enter R-P-S into the input
-// (do while loop)
-// - use Prompt to ask input of R, P, or S
-// - validation check of input against array of correct inputs
-// - generate the commputers choice
-//     - create a random number, convert to 0, 1, 2 (R, P, S)
-// - alert to computer's choice
-// - calculate if won, tied, or lost with conditional statements
-//     - create result message (string)
-//     - calculate/increment (new) stat
-// - alert to state of if you won, tied, or lost (that round)
-// - alert of overall stats
-// - win or lose, ask if play again with confirm
-// - if true, play again
-//     - (loop continues)
-//     - if false, exit app
-//         - (loop ends)
-// - alert: final results - counting wins, ties, losses
+let wins = 0;
+let ties = 0;
+let losses = 0;
 
-// Need variables:
-// - Rock
-// - Paper
-// - Scissors
+const options = ["R", "P", "S"];
 
-// Random generator for computer R, P, S
+const playGame = function() {
+    let userChoice = prompt("Enter R, P, or S:");
+    if (!userChoice) {
+        return;
+    }
+    userChoice = userChoice.toUpperCase();
 
+    let index = Math.floor(Math.random() * options.length);
+    let computerChoice = options[index];
 
+    alert(`
+    You chose ${userChoice}
+    The computer chose ${computerChoice}
+    `);
 
-function playGame() {
+    if (userChoice === computerChoice) {
+        ties++;
+        alert("It's a tie!");
+    } else if (
+        (userChoice === "R" && computerChoice === "S") ||
+        (userChoice === "P" && computerChoice === "R") ||
+        (userChoice === "S" && computerChoice === "P")
+    ) {
+        wins++;
+        window.alert("You win!");
+    } else {
+        losses++;
+        window.alert("You lost!");
+    };
 
-// VARIABLES
-// index of 0, 1, 2
-var inputSelections = ["R", "P", "S"];
-var ourChoice = "";
-var compChoice = "";
-var isInputValid = false;
-var randomNumber = 0;
-var randomIndex = 0;
-var PlayGameAgain = false;
+    // alert(`
+    // STATS:
+    // Wins: ${wins}
+    // Losses: ${losses}
+    // Ties: ${ties}
+    // `);
 
-var results = {
-    wins: 0,
-    ties: 0,
-    losses: 0
+    const playAgain = confirm(`
+    STATS:
+    Wins: ${wins}
+    Losses: ${losses}
+    Ties: ${ties}
+
+    Play again?
+    `);
+
+    if (playAgain) {
+        playGame();
+    }
 };
 
-var messages = {
-    youWon: "You won!",
-    youTied: "You tied!",
-    youLost: "You lost!",
-    playAgain: "Do you want to play again?",
-    overallStats: `Wins: ${results.wins} | Ties: ${results.ties} | Losses: ${results.losses} | Keep going!`,
-    thanks: "Thank you for playing!",
-    enterSelection: "Please choose R, P, or S",
-    invalidInput: "Invalid input. Please try again.",
-    computerInput: `The computer chose ${compChoice}`
-}
-
-    // do {
-
-        // get a valid input: R, P, or S
-        do {
-                isInputValid = false;
-                ourChoice = window.prompt(messages.enterSelection);
-                if (ourChoice === null) {
-                    return;
-                }
-                ourChoice = ourChoice.toUpperCase();
-
-                if (inputSelections.includes(ourChoice)) {
-                    isInputValid = true;
-                } else {
-                    window.alert(messages.invalidInput);
-                }
-        } while (!isInputValid)
-
-        // get computer's input: R, P, or S
-
-
-        console.log(ourChoice);
-
-
-    // } while (PlayGameAgain);
-}
-
-playGame();
+// playGame();
+const playGameButton = document.getElementById("play-game");
+playGameButton.addEventListener("click", playGame);
