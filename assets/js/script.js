@@ -3,12 +3,10 @@ let ties = 0;
 let losses = 0;
 
 const copmuterOptions = ["R", "P", "S"];
-const userOptions = document.getElementById('options');
 
 const gameRound = document.getElementById('game-round-choice');
 const gameRoundChoice = document.getElementById('game-round-result');
 const results = document.getElementById('results');
-// const userChoiceForm = document.getElementById('user-choice');
 const R = document.getElementById('R');
 const P = document.getElementById('P');
 const S = document.getElementById('S');
@@ -39,7 +37,6 @@ function clickedScissors(e) {
 
 const playGame = function(userClicked) {
     console.log("play game")
-    // userChoice = userChoice.toUpperCase();
     console.log(userClicked)
 
     let index = Math.floor(Math.random() * copmuterOptions.length);
@@ -81,8 +78,6 @@ const playGame = function(userClicked) {
     </p>`;
 };
 
-// document.getElementById("play-game").addEventListener("click", playGame);
-// document.getElementById('options').addEventListener('click', playGame);
 R.addEventListener('click', clickedRock);
 P.addEventListener('click', clickedPaper);
 S.addEventListener('click', clickedScissors);
